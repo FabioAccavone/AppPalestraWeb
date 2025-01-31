@@ -1,14 +1,14 @@
-import mysql from 'mysql2'
-import express from 'express'
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
-import cors from 'cors'
+import mysql from 'mysql2';
+import express from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import cors from 'cors';
 
 const db = mysql.createConnection({
   host: 'localhost',
-  user: 'root',        // Inserisci qui il tuo utente
-  password: 'ProgrammazioneWeb2025', // Inserisci qui la tua password
-  database: 'dbweb' // Inserisci il nome del tuo DB
+  user: 'root',
+  password: 'ProgrammazioneWeb2025',
+  database: 'dbweb'
 });
 
 db.connect((err) => {
@@ -16,16 +16,22 @@ db.connect((err) => {
   console.log('Database connected!');
 });
 
-
-
 const app = express();
 app.use(express.json());
 app.use(cors());
 
 app.post('/login', (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, role } = req.body; // Aggiunto il ruolo
+  let query;
 
-  const query = 'SELECT * FROM users WHERE username = ?';
+  if (role === 'utente') {
+    query = 'SELECT * FROM utenti WHERE username = ?';
+  } else if (role === 'pt') {
+    query = 'SELECT * FROM pt WHERE username = ?';
+  } else {
+    return res.status(400).send('Ruolo non valido');
+  }
+
   db.query(query, [username], (err, results) => {
     if (err) return res.status(500).send('Database error');
     if (results.length === 0) return res.status(401).send('User not found');
@@ -35,16 +41,10 @@ app.post('/login', (req, res) => {
       if (err) return res.status(500).send('Error during password comparison');
       if (!isMatch) return res.status(401).send('Invalid password');
 
-      const token = jwt.sign({ id: user.id }, 'your_jwt_secret', { expiresIn: '1h' });
-      res.json({ token });
+      const token = jwt.sign({ id: user.id, role }, 'your_jwt_secret', { expiresIn: '1h' });
+      res.json({ token, role });
     });
   });
-});
-
-// Catch all errors
-app.use((err, req, res, next) => {
-  console.error(err.stack);  // Stampa l'errore nel terminale
-  res.status(500).send('Qualcosa è andato storto!');
 });
 
 app.listen(5000, () => {

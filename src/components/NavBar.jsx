@@ -14,6 +14,7 @@ function NavBar(){
     // Funzione per il logout
     const handleLogout = () => {
       localStorage.removeItem('token'); // Rimuovi il token
+      localStorage.removeItem('role'); // Rimuovi il ruolo
       navigate('/'); // Reindirizza alla home page
     };
   

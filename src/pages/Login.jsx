@@ -11,6 +11,7 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [role, setRole] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -19,16 +20,20 @@ const Login = () => {
       const response = await axios.post('http://localhost:5000/login', {
         username,
         password,
+        role,
       });
-
       // Salva il token JWT ricevuto nella risposta
-      localStorage.setItem('token', response.data.token);
-      setError('');
-      navigate('/AreaRiservata', { state: { message: 'Login successful!' } }); // Usa navigate per reindirizzare
-      
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('role', response.data.role);
+        if (response.data.role === 'utente') {
+          navigate('/AreaRiservata', { state: { message: 'Login successful Utente!' } });
+        } else {
+          navigate('/AreaRiservata', { state: { message: 'Login successful PT!' } });
+          }
     } catch (error) {
-      setError('Invalid username or password');
+      setError('Invalid credentials');
     }
+
   };
 
   return (
@@ -55,6 +60,14 @@ const Login = () => {
             required
           />
         </div>
+        <div>
+            <label>Ruolo:</label>
+            <select value={role} onChange={(e) => setRole(e.target.value)} required>
+            <option value=""></option>
+              <option value="utente">Utente</option>
+              <option value="pt">Personal Trainer</option>
+            </select>
+          </div>
         <button type="submit">Login</button>
         {error && <p>{error}</p>}
       </form>
@@ -64,3 +77,5 @@ const Login = () => {
 };
 
 export default Login;
+
+
