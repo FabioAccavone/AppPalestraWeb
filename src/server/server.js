@@ -41,8 +41,8 @@ app.post('/login', (req, res) => {
       if (err) return res.status(500).send('Error during password comparison');
       if (!isMatch) return res.status(401).send('Invalid password');
 
-      const token = jwt.sign({ id: user.id, role }, 'your_jwt_secret', { expiresIn: '1h' });
-      res.json({ token, role });
+      const token = jwt.sign({ id: user.idUtente, role }, 'your_jwt_secret', { expiresIn: '1h' });
+      res.json({ token, role, id: user.idUtente});
     });
   });
 });

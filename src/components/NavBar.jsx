@@ -1,49 +1,67 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom'; 
+import  { useContext } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from '../context/AuthContext'; // Importa il contesto
 import './NavBar.css';  // Importa il file CSS
 
 function NavBar(){
 
     const navigate = useNavigate();
+    const { user, logout } = useContext(AuthContext); // Usa il contesto per ottenere l'utente
 
     // Controlla se il token è presente in localStorage
-    const isLoggedIn = !!localStorage.getItem('token');
+    const isLoggedIn = !!user; // Verifica se l'utente è loggato
+
   
     // Funzione per il logout
     const handleLogout = () => {
-      localStorage.removeItem('token'); // Rimuovi il token
-      localStorage.removeItem('role'); // Rimuovi il ruolo
-      navigate('/'); // Reindirizza alla home page
+      logout(); //Elimino il contesto e il localStorage
+      navigate('/',{ state: { message: 'Logout successful!' } }); // Reindirizza alla home page
     };
   
     return (
         <nav className="navbar">
-          <div className="navbar-container">
+          <span className="navbar-container">
             <Link to="/" className="navbar-link">
               <button className="navbar-button">HOME</button>
             </Link>
     
             {/* Se l'utente è loggato, mostriamo i bottoni per il logout e altre pagine */}
             {isLoggedIn ? (
-              <div className="navbar-links">
+              <span className="navbar-links">
                 <button className="navbar-button" onClick={handleLogout}>
                   Logout
                 </button>
-                <Link to="/page1" className="navbar-link">
-                  <button className="navbar-button">Pagina 1</button>
-                </Link>
-                <Link to="/page2" className="navbar-link">
-                  <button className="navbar-button">Pagina 2</button>
-                </Link>
-              </div>
+                {// Se ha il ruolo di utente, mostriamo i bottoni della sua area personale
+                  user.role === 'utente' ? (
+                    <span className="navbar-links-utente">
+                        <Link to="/prenotazioni" className="navbar-link">
+                            <button className="navbar-button">Prenotazioni</button>
+                        </Link>
+                        <Link to="/schede" className="navbar-link">
+                            <button className="navbar-button">Schede</button>
+                        </Link>
+                        <Link to="/anagrafica" className="navbar-link">
+                            <button className="navbar-button">Anagrafica</button>
+                        </Link>
+                    </span>
+                  /* Se ha il ruolo di utente, mostriamo i bottoni della sua area personale */
+                ) : user.role === 'pt' ? (
+                    <span className="navbar-links-pt">
+                        <Link to="/gestisci-richieste" className="navbar-link">
+                            <button className="navbar-button">Gestisci Richieste</button>
+                        </Link>
+                    </span>
+                ) : null}
+              </span>
+              //Se non è loggato, mostriamo il bottone per  il Login
             ) : (
               <Link to="/login" className="navbar-link">
                 <button className="navbar-button">LOGIN</button>
               </Link>
             )}
-          </div>
+          </span>
         </nav>
       );
 }

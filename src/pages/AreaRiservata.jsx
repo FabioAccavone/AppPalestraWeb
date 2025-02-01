@@ -23,7 +23,6 @@ const AreaRiservata = () => {
       <NavBar></NavBar>
       <h2>Benvenuto nella tua area riservata!</h2>
       <p>Qui puoi accedere ai tuoi dati e gestire il tuo account.</p>
-      {/* ToastContainer per mostrare i toast */}
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
     </div>
   );

@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import NavBar from '../components/NavBar';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify'; // Importa
+import { ToastContainer, toast } from 'react-toastify'; // Importa della notifica
+import { AuthContext } from '../context/AuthContext';
 import 'react-toastify/dist/ReactToastify.css'; // Stili
 
 
 const Login = () => {
+  const { login } = useContext(AuthContext); // Prendi la funzione login dal context
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -22,9 +24,9 @@ const Login = () => {
         password,
         role,
       });
-      // Salva il token JWT ricevuto nella risposta
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('role', response.data.role);
+
+      login(response.data.token, response.data.role, response.data.idUser); //  Salva nel context
+      console.log(response.data.role);
         if (response.data.role === 'utente') {
           navigate('/AreaRiservata', { state: { message: 'Login successful Utente!' } });
         } else {
