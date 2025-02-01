@@ -25,8 +25,7 @@ const Login = () => {
         role,
       });
 
-      login(response.data.token, response.data.role, response.data.idUser); //  Salva nel context
-      console.log(response.data.role);
+      login(response.data.token, response.data.role, response.data.idUtente); //  Salva nel context
         if (response.data.role === 'utente') {
           navigate('/AreaRiservata', { state: { message: 'Login successful Utente!' } });
         } else {

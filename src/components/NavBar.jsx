@@ -30,9 +30,6 @@ function NavBar(){
             {/* Se l'utente è loggato, mostriamo i bottoni per il logout e altre pagine */}
             {isLoggedIn ? (
               <span className="navbar-links">
-                <button className="navbar-button" onClick={handleLogout}>
-                  Logout
-                </button>
                 {// Se ha il ruolo di utente, mostriamo i bottoni della sua area personale
                   user.role === 'utente' ? (
                     <span className="navbar-links-utente">
@@ -45,6 +42,9 @@ function NavBar(){
                         <Link to="/anagrafica" className="navbar-link">
                             <button className="navbar-button">Anagrafica</button>
                         </Link>
+                        <button className="navbar-button" onClick={handleLogout}>
+                         Logout
+                        </button>
                     </span>
                   /* Se ha il ruolo di utente, mostriamo i bottoni della sua area personale */
                 ) : user.role === 'pt' ? (
@@ -52,6 +52,9 @@ function NavBar(){
                         <Link to="/gestisci-richieste" className="navbar-link">
                             <button className="navbar-button">Gestisci Richieste</button>
                         </Link>
+                        <button className="navbar-button" onClick={handleLogout}>
+                          Logout
+                         </button>
                     </span>
                 ) : null}
               </span>

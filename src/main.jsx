@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import AreaRiservata from './pages/AreaRiservata.jsx'
 import ProtectedRoute from './components/ProtectedRouter.jsx'
 import AuthProvider from './context/AuthContext.jsx';
+import Prenotazione from './pages/Prenotazione.jsx'
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
             </ProtectedRoute>
           ),
     },
+    {
+        path:"/prenotazioni",
+        element: <Prenotazione/>
+    }
     
 ]);
 
