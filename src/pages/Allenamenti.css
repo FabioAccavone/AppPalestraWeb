@@ -1,0 +1,90 @@
+.allenamenti-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adatta le card alla larghezza */
+  gap: 20px;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 20px auto;
+}
+
+.allenamento-card {
+  background: #1e293b; /* Grigio scuro per abbinarsi alla navbar */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: white;
+  transition: transform 0.2s ease-in-out;
+}
+
+.allenamento-card:hover {
+  transform: scale(1.05);
+}
+
+.allenamento-card p {
+  margin: 5px 0;
+}
+
+.btn-prenota {
+  background-color: #2563eb; /* Blu per abbinarsi ai pulsanti della navbar */
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.btn-prenota:hover {
+  background-color: #1e40af;
+}
+
+.btn-cerca {
+  background-color: #2563eb; /* Blu per abbinarsi ai pulsanti della navbar */
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.btn-cerca:hover {
+  background-color: #1e40af;
+}
+
+/* 🔹 Stili per il selettore di data */
+.data-selezione {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.data-selezione label {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 8px;
+}
+
+/* 🔹 Stile per l'input della data */
+.data-selezione input {
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #2563eb;
+  border-radius: 6px;
+  outline: none;
+  text-align: center;
+  background-color: #1e293b;
+  color: white;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* 🔹 Effetto quando l'utente clicca sull'input */
+.data-selezione input:focus {
+  border-color: #1e40af;
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.5);
+}
