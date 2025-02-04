@@ -29,11 +29,19 @@ const router = createBrowserRouter([
     },
     {
         path:"/prenotazioni",
-        element: <Prenotazioni/>
+        element:(
+            <ProtectedRoute> {/* Avvolgi la rotta dashboard */}
+              <Prenotazioni />
+            </ProtectedRoute>
+          ),
     },
     {
         path:"/allenamenti",
-        element: <Allenamenti/>
+        element:(
+            <ProtectedRoute> {/* Avvolgi la rotta dashboard */}
+              <Allenamenti />
+            </ProtectedRoute>
+          ),
     }
     
 ]);

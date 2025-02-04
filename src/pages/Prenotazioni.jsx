@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NavBar from '../components/NavBar';
+import PrenotazioneCard from '../components/PrenotazioneCard';
 import './Prenotazioni.css'; // Importa il file CSS
 
 const Prenotazioni = () => {
@@ -16,11 +17,27 @@ const Prenotazioni = () => {
   useEffect(() => {
     if (!user) return;
 
-    axios.get(`http://localhost:5000/miePrenotazioni?idUtente=${user.id}`)
+    axios.get(`http://localhost:5000/api/prenotazioni/miePrenotazioni?idUtente=${user.id}`)
       .then(response => setPrenotazioni(response.data))
       .catch(error => console.error('Errore nel recupero delle prenotazioni:', error));
   }, [user]);
 
+  // Funzione per cancellare una prenotazione
+  const handleDelete = (idPrenotazione) => {
+    axios
+      .delete(`http://localhost:5000/api/prenotazioni/eliminaPrenotazione/${idPrenotazione}`)
+      .then(() => {
+        toast.success("Prenotazione cancellata con successo!");
+        setPrenotazioni(prenotazioni.filter((p) => p.idPrenotazione !== idPrenotazione));
+      })
+      .catch(() => toast.error("Errore nella cancellazione della prenotazione."));
+  };
+
+  // Funzione per modificare una prenotazione (reindirizza a una pagina di modifica)
+  const handleEdit = (idPrenotazione) => {
+    navigate(`/modifica-prenotazione/${idPrenotazione}`);
+  };
+  
   return (
     <div className="richieste-container">
       <NavBar />
@@ -31,10 +48,8 @@ const Prenotazioni = () => {
       ) : (
         <div className="prenotazioni-list">
           {prenotazioni.map(prenotazione => (
-            <div key={prenotazione.idPrenotazione} className="prenotazione-card">
-              <p><strong>Data:</strong> {prenotazione.dataAllenamento}</p>
-              <p><strong>Ora:</strong> {prenotazione.oraInizio}</p>
-            </div>
+           <PrenotazioneCard key={prenotazione.idPrenotazione} prenotazione={prenotazione} 
+             handleEdit={handleEdit} handleDelete={handleDelete} />
           ))}
         </div>
       )}
