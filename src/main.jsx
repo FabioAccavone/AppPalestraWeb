@@ -9,6 +9,7 @@ import ProtectedRoute from './components/ProtectedRouter.jsx'
 import AuthProvider from './context/AuthContext.jsx';
 import Allenamenti from './pages/Allenamenti.jsx'
 import Prenotazioni from './pages/Prenotazioni.jsx'
+import ModificaPrenotazione from './pages/ModificaPrenotazione.jsx'
 
 const router = createBrowserRouter([
     {
@@ -29,19 +30,15 @@ const router = createBrowserRouter([
     },
     {
         path:"/prenotazioni",
-        element:(
-            <ProtectedRoute> {/* Avvolgi la rotta dashboard */}
-              <Prenotazioni />
-            </ProtectedRoute>
-          ),
+        element: <Prenotazioni/>
     },
     {
         path:"/allenamenti",
-        element:(
-            <ProtectedRoute> {/* Avvolgi la rotta dashboard */}
-              <Allenamenti />
-            </ProtectedRoute>
-          ),
+        element: <Allenamenti/>
+    },
+    {
+        path:"/modifica-prenotazione/:idPrenotazione",
+        element:<ModificaPrenotazione/>
     }
     
 ]);

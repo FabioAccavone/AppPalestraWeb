@@ -47,8 +47,9 @@
     margin-top: 20px;
   }
   
-  .btn-prenota-nuovo {
+  .btn-prenota-nuovo,.btn-edit,.btn-delete {
     background-color: #2563eb; /* Blu simile ai bottoni esistenti */
+    margin-right: 10px; /* Aggiunge uno spazio tra i bottoni */
     color: white;
     padding: 10px 15px;
     font-size: 16px;
@@ -59,7 +60,7 @@
     transition: background-color 0.3s;
   }
   
-  .btn-prenota-nuovo:hover {
+  .btn-prenota-nuovo:hover, .btn-edit:hover,.btn-delete:hover{
     background-color: #1e40af;
   }
   

@@ -49,7 +49,7 @@ const Prenotazioni = () => {
         <div className="prenotazioni-list">
           {prenotazioni.map(prenotazione => (
            <PrenotazioneCard key={prenotazione.idPrenotazione} prenotazione={prenotazione} 
-             handleEdit={handleEdit} handleDelete={handleDelete} />
+              handleEdit={handleEdit} handleDelete={handleDelete} />
           ))}
         </div>
       )}
