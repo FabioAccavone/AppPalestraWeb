@@ -48,8 +48,7 @@ const Allenamenti = () => {
       <NavBar />
       <h2 className="prenotazioni-titolo">Prenota il tuo Allenamento</h2>
       <p className="prenotazioni-sottotitolo">Seleziona la data per vedere gli allenamenti disponibili.</p>
-
-      {/* Input per selezionare la data */}
+      
       <div className="data-selezione">
         <label htmlFor="dataAllenamento" className="date-label">Seleziona una data:</label>
         <input
@@ -76,7 +75,7 @@ const Allenamenti = () => {
           ))
         )}
       </div>
-
+    
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
     </div>
   );

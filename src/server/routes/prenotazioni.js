@@ -52,4 +52,48 @@ router.get('/miePrenotazioni', (req, res) => {
     res.json(prenotazioniFormattate);
   });
 });
+
+
+//DELETE della prenotazione
+router.delete("/eliminaPrenotazione/:idPrenotazione", (req, res) => {
+  const { idPrenotazione } = req.params;
+
+  const deleteQuery = "DELETE FROM prenotazioni WHERE idPrenotazione = ?";
+  
+  db.query(deleteQuery, [idPrenotazione], (err, result) => {
+    if (err) {
+      console.error("Errore nella cancellazione della prenotazione:", err);
+      return res.status(500).json({ error: "Errore nella cancellazione della prenotazione" });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Prenotazione non trovata" });
+    }
+
+    res.json({ message: "Prenotazione cancellata con successo" });
+  });
+});
+
+
+//UPDATE della prenotazione
+router.put('/modificaPrenotazione/:idPrenotazione', (req, res) => {
+  const { idPrenotazione } = req.params;
+  const { idAllenamento } = req.body;
+ 
+    // Controlla se l'allenamento ha ancora posti disponibili
+    const checkPostiQuery = 'SELECT numPosti FROM allenamenti WHERE idAllenamento = ?';
+    db.query(checkPostiQuery, [idAllenamento], (err, rows) => {
+      if (err) return res.status(500).send('Errore nel controllo dei posti disponibili');
+      if (rows.length === 0 || rows[0].numPosti <= 0) return res.status(400).send('Allenamento al completo');
+ 
+      // Aggiorna la prenotazione
+      const updatePrenotazioneQuery = 'UPDATE prenotazioni SET idAllenamento = ? WHERE idPrenotazione = ?';
+      db.query(updatePrenotazioneQuery, [idAllenamento, idPrenotazione], (err) => {
+        if (err) return res.status(500).send('Errore nella modifica della prenotazione');
+ 
+        res.send('Prenotazione modificata con successo');
+      });
+    });
+  });
+
 export default router;
