@@ -5,6 +5,7 @@ import authRoutes from './routes/auth.js';
 import allenamentiRoutes from './routes/allenamenti.js';
 import prenotazioniRoutes from './routes/prenotazioni.js';
 import schedeRoutes from './routes/schede.js';
+import utenteRoutes from './routes/utente.js';
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/allenamenti', allenamentiRoutes);
 app.use('/api/prenotazioni', prenotazioniRoutes);
 app.use('/api/schede', schedeRoutes);
+app.use('/api/utente', utenteRoutes)
 
 app.listen(5000, () => {
   console.log('🚀 Server running on http://localhost:5000');

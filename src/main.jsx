@@ -12,6 +12,7 @@ import Prenotazioni from './pages/Prenotazioni.jsx'
 import ModificaPrenotazione from './pages/ModificaPrenotazione.jsx'
 import MieSchede from './pages/MieSchede.jsx'
 import DettagliScheda from './pages/DettagliScheda.jsx'
+import Anagrafica from './pages/Anagrafica.jsx'
 
 
 const router = createBrowserRouter([
@@ -33,23 +34,39 @@ const router = createBrowserRouter([
     },
     {
         path:"/prenotazioni",
-        element: <Prenotazioni/>
+        element: (<ProtectedRoute> {/* Avvolgi la rotta dashboard */}
+        <Prenotazioni/>
+        </ProtectedRoute>),
     },
     {
         path:"/allenamenti",
-        element: <Allenamenti/>
+        element: (<ProtectedRoute> {/* Avvolgi la rotta dashboard */}
+            <Allenamenti/>
+            </ProtectedRoute>),
     },
     {
         path:"/modifica-prenotazione/:idPrenotazione",
-        element:<ModificaPrenotazione/>
+        element:(<ProtectedRoute> {/* Avvolgi la rotta dashboard */}
+            <ModificaPrenotazione/>
+            </ProtectedRoute>),
     },
     {
         path:"/schede",
-        element:<MieSchede/>
+        element:(<ProtectedRoute> {/* Avvolgi la rotta dashboard */}
+            <MieSchede/>
+            </ProtectedRoute>),
     },
     {
         path:"dettagli-scheda/:idScheda",
-        element:<DettagliScheda/>
+        element:(<ProtectedRoute> {/* Avvolgi la rotta dashboard */}
+            <DettagliScheda/>
+            </ProtectedRoute>),
+    },
+    {
+        path:"anagrafica",
+        element:(<ProtectedRoute> {/* Avvolgi la rotta dashboard */}
+            <Anagrafica/>
+            </ProtectedRoute>),
     }
     
 ]);
