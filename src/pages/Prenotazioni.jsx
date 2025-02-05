@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NavBar from '../components/NavBar';
@@ -12,6 +12,15 @@ const Prenotazioni = () => {
   const [prenotazioni, setPrenotazioni] = useState([]);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation(); // Ottieni la posizione attuale
+  const [messageShown, setMessageShown] = useState(false); // Stato per controllare se il messaggio è stato mostrato
+
+  useEffect(() => {
+    if (location.state && location.state.message && !messageShown) {
+      toast.success(location.state.message); // Mostra il toast con il messaggio di successo
+      setMessageShown(true); // Imposta che il messaggio è stato mostrato
+    }
+  }, [location, messageShown]); // Esegui quando cambia la posizione, ma solo se il messaggio non è già stato mostrato
 
   // Funzione per caricare le prenotazioni dell'utente
   useEffect(() => {

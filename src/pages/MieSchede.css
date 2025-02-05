@@ -1,0 +1,79 @@
+/* MieSchede.css */
+.schede-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #1e293b; /* Sfondo scuro per coerenza con altre pagine */
+    color: white;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: white;
+  }
+  
+  .no-schede {
+    font-size: 18px;
+    color: #f43f5e; /* Colore rosso per il messaggio "nessuna scheda" */
+    font-weight: bold;
+  }
+  
+  .schede-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 20px;
+  }
+  
+  .scheda-card {
+    background: #2563eb; /* Blu per le card delle schede */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+  
+  .scheda-card:hover {
+    background-color: #1e40af; /* Colore più scuro al passaggio del mouse */
+    transform: scale(1.05); /* Leggero ingrandimento quando l'utente ci passa sopra */
+  }
+  
+  .scheda-card p {
+    font-size: 16px;
+    margin: 8px 0;
+  }
+  
+  .scheda-card strong {
+    color: #fbbf24; /* Giallo per evidenziare le etichette */
+  }
+  
+  .scheda-card .personal-trainer {
+    font-size: 14px;
+    font-style: italic;
+    margin-top: 10px;
+    color: #e2e8f0; /* Colore chiaro per il nome del personal trainer */
+  }
+  
+  /* Aggiungi un po' di padding al fondo della pagina */
+  .schede-container p {
+    margin: 10px 0;
+  }
+  
+  .no-schede {
+    color: #ff0000;
+    font-size: 18px;
+    text-align: center;
+  }
+  

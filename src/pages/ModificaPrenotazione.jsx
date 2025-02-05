@@ -42,8 +42,7 @@ const ModificaPrenotazione = () => {
         idAllenamento: selectedAllenamento
       })
       .then(() => {
-        toast.success("Prenotazione aggiornata con successo!");
-        navigate("/prenotazioni");
+        navigate('/prenotazioni', { state: { message: 'Prenotazione aggiornata con successo!' } });
       })
       .catch(() => toast.error("Errore nella modifica della prenotazione."));
   };

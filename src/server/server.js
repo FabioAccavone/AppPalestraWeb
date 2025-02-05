@@ -4,6 +4,7 @@ import db from './config/db.js';
 import authRoutes from './routes/auth.js';
 import allenamentiRoutes from './routes/allenamenti.js';
 import prenotazioniRoutes from './routes/prenotazioni.js';
+import schedeRoutes from './routes/schede.js';
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(cors());
 app.use('/api/auth', authRoutes);
 app.use('/api/allenamenti', allenamentiRoutes);
 app.use('/api/prenotazioni', prenotazioniRoutes);
+app.use('/api/schede', schedeRoutes);
 
 app.listen(5000, () => {
   console.log('🚀 Server running on http://localhost:5000');

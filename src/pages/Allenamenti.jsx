@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -38,7 +38,7 @@ const Allenamenti = () => {
 
     axios.post('http://localhost:5000/api/prenotazioni/prenotaAllenamento', { idUtente, idAllenamento })
       .then(() => {
-        toast.success('Prenotazione effettuata con successo!');
+        navigate('/prenotazioni', { state: { message: 'Prenotazione effettuata con successo!' } });
       })
       .catch(() => toast.error('Errore nella prenotazione.'));
   };

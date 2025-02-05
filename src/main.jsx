@@ -6,11 +6,13 @@ import Login from './pages/Login.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'  
 import AreaRiservata from './pages/AreaRiservata.jsx'
 import ProtectedRoute from './components/ProtectedRouter.jsx'
-import AuthProvider from './context/AuthContext.jsx';
+import AuthProvider from './context/AuthContext.jsx'
 import Allenamenti from './pages/Allenamenti.jsx'
 import Prenotazioni from './pages/Prenotazioni.jsx'
 import ModificaPrenotazione from './pages/ModificaPrenotazione.jsx'
-//import Schede from './pages/Schede.jsx'
+import MieSchede from './pages/MieSchede.jsx'
+import DettagliScheda from './pages/DettagliScheda.jsx'
+
 
 const router = createBrowserRouter([
     {
@@ -40,11 +42,15 @@ const router = createBrowserRouter([
     {
         path:"/modifica-prenotazione/:idPrenotazione",
         element:<ModificaPrenotazione/>
-    }
-   /* {
+    },
+    {
         path:"/schede",
-        element:<Schede/>
-    }*/
+        element:<MieSchede/>
+    },
+    {
+        path:"dettagli-scheda/:idScheda",
+        element:<DettagliScheda/>
+    }
     
 ]);
 
