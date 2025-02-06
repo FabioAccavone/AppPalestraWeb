@@ -52,7 +52,7 @@ function NavBar(){
                   /* Se ha il ruolo di pt, mostriamo i bottoni della sua area personale */
                 ) : user.role === 'pt' ? (
                     <span className="navbar-links-pt">
-                        <Link to="/gestisciRichieste" className="navbar-link">
+                        <Link to="/gestione-richieste" className="navbar-link">
                             <button className="navbar-button">Gestisci Richieste</button>
                         </Link>
                         <button className="navbar-button" onClick={handleLogout}>
