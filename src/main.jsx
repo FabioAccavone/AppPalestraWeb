@@ -13,7 +13,7 @@ import ModificaPrenotazione from './pages/ModificaPrenotazione.jsx'
 import MieSchede from './pages/MieSchede.jsx'
 import DettagliScheda from './pages/DettagliScheda.jsx'
 import Anagrafica from './pages/Anagrafica.jsx'
-
+import RichiestaScheda from './pages/RichiestaScheda.jsx'
 
 const router = createBrowserRouter([
     {
@@ -67,7 +67,14 @@ const router = createBrowserRouter([
         element:(<ProtectedRoute> {/* Avvolgi la rotta dashboard */}
             <Anagrafica/>
             </ProtectedRoute>),
+    },
+    {
+        path:"richiesta",
+        element:(<ProtectedRoute> {/* Avvolgi la rotta dashboard */}
+            <RichiestaScheda/>
+            </ProtectedRoute>),
     }
+
     
 ]);
 

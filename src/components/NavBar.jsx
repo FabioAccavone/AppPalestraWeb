@@ -42,11 +42,14 @@ function NavBar(){
                         <Link to="/anagrafica" className="navbar-link">
                             <button className="navbar-button">Anagrafica</button>
                         </Link>
+                        <Link to="/richiestascheda" className="navbar-link">
+                            <button className="navbar-button">Richiesta</button>
+                        </Link>
                         <button className="navbar-button" onClick={handleLogout}>
                          Logout
                         </button>
                     </span>
-                  /* Se ha il ruolo di utente, mostriamo i bottoni della sua area personale */
+                  /* Se ha il ruolo di pt, mostriamo i bottoni della sua area personale */
                 ) : user.role === 'pt' ? (
                     <span className="navbar-links-pt">
                         <Link to="/gestisciRichieste" className="navbar-link">
