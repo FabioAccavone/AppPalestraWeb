@@ -57,19 +57,19 @@ const router = createBrowserRouter([
             </ProtectedRoute>),
     },
     {
-        path:"dettagli-scheda/:idScheda",
+        path:"/dettagli-scheda/:idScheda",
         element:(<ProtectedRoute> {/* Avvolgi la rotta dashboard */}
             <DettagliScheda/>
             </ProtectedRoute>),
     },
     {
-        path:"anagrafica",
+        path:"/anagrafica",
         element:(<ProtectedRoute> {/* Avvolgi la rotta dashboard */}
             <Anagrafica/>
             </ProtectedRoute>),
     },
     {
-        path:"richiesta",
+        path:"/richiesta-scheda",
         element:(<ProtectedRoute> {/* Avvolgi la rotta dashboard */}
             <RichiestaScheda/>
             </ProtectedRoute>),

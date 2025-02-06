@@ -16,16 +16,18 @@ const Anagrafica = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
- 
-    // Carica i dati dell'utente
+    if(user){
+      // Carica i dati dell'utente
     axios.get(`http://localhost:5000/api/utente/dati?idUtente=${user.id}`)
-      .then(response => {
-        setUserData(response.data);
-      })
-      .catch(error => {
-        toast.error('Errore nel recupero dei dati utente.');
-        console.error(error);
-      });
+    .then(response => {
+      setUserData(response.data);
+    })
+    .catch(error => {
+      toast.error('Errore nel recupero dei dati utente.');
+      console.error(error);
+    });
+    }
+    
   }, [user]);
 
   const handleUpdate = () => {

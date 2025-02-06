@@ -42,7 +42,7 @@ function NavBar(){
                         <Link to="/anagrafica" className="navbar-link">
                             <button className="navbar-button">Anagrafica</button>
                         </Link>
-                        <Link to="/richiestascheda" className="navbar-link">
+                        <Link to="/richiesta-scheda" className="navbar-link">
                             <button className="navbar-button">Richiesta</button>
                         </Link>
                         <button className="navbar-button" onClick={handleLogout}>
