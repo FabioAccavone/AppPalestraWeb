@@ -7,6 +7,8 @@ import prenotazioniRoutes from './routes/prenotazioni.js';
 import schedeRoutes from './routes/schede.js';
 import utenteRoutes from './routes/utente.js';
 import richiestaRoutes from './routes/richiesta.js';
+import gestioneUtentiRoutes from './routes/gestioneUtenti.js'
+
 const app = express();
 
 app.use(express.json());
@@ -19,6 +21,7 @@ app.use('/api/prenotazioni', prenotazioniRoutes);
 app.use('/api/schede', schedeRoutes);
 app.use('/api/utente', utenteRoutes);
 app.use('/api/richiesta', richiestaRoutes);
+app.use('/api/gestioneutente', gestioneUtentiRoutes);
 
 app.listen(5000, () => {
   console.log('🚀 Server running on http://localhost:5000');

@@ -38,6 +38,7 @@ const LoginForm = ({ onSubmit }) => {
           <option value="">Seleziona un ruolo</option>
           <option value="utente">Utente</option>
           <option value="pt">Personal Trainer</option>
+          <option value="admin">Admin</option>
         </select>
       </div>
       <button type="submit">Login</button>

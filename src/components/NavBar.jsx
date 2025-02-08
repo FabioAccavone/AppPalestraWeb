@@ -59,6 +59,18 @@ function NavBar(){
                           Logout
                          </button>
                     </span>
+                ) : user.role === 'admin' ? (
+                  <span className="navbar-links-admin">
+                      <Link to="/gestione-utenti" className="navbar-link">
+                          <button className="navbar-button">Gestisci Utenti</button>
+                      </Link>
+                      <Link to="/gestione-pt" className="navbar-link">
+                          <button className="navbar-button">Gestisci Pt</button>
+                      </Link>
+                      <button className="navbar-button" onClick={handleLogout}>
+                        Logout
+                       </button>
+                  </span>
                 ) : null}
               </span>
               //Se non è loggato, mostriamo il bottone per  il Login
