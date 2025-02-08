@@ -21,7 +21,7 @@ app.use('/api/prenotazioni', prenotazioniRoutes);
 app.use('/api/schede', schedeRoutes);
 app.use('/api/utente', utenteRoutes);
 app.use('/api/richiesta', richiestaRoutes);
-app.use('/api/gestioneutente', gestioneUtentiRoutes);
+app.use('/api/gestione-utente', gestioneUtentiRoutes);
 
 app.listen(5000, () => {
   console.log('🚀 Server running on http://localhost:5000');

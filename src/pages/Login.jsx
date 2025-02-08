@@ -22,11 +22,14 @@ const Login = () => {
         if (response.data.role === 'utente') {
           navigate('/AreaRiservata', { state: { message: 'Login successful Utente!' } });
         }
-        if (response.data.role === 'PT') {
+        if (response.data.role === 'pt') {
           navigate('/AreaRiservata', { state: { message: 'Login successful PT!' } }); 
         }
-        else
+        if(response.data.role === 'admin'){
           navigate('/AreaRiservata', { state: { message: 'Login successful Admin!' } });
+        }
+        
+          
     } catch (error) {
       setError('Invalid credentials');
     }
