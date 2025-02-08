@@ -89,5 +89,55 @@ router.get("/dettagliScheda/:idScheda", (req, res) => {
   });
   
   
+// Creazione di una nuova scheda di allenamento
+router.post('/creaScheda', async (req, res) => {
+  const { dataInizio, dataFine, idUtente, idPT } = req.body;
+
+  const query = 'INSERT INTO scheda (dataInizio, dataFine, idUtente, idPT) VALUES (?, ?, ?, ?)';
+  
+  db.query(query, [dataInizio, dataFine, idUtente, idPT], (err, result) => {
+      if (err) {
+          console.error("Errore nella creazione della scheda:", err);
+          return res.status(500).json({ error: "Errore nella creazione della scheda" });
+      }
+      res.json({ message: "Scheda creata con successo", idScheda: result.insertId });
+  });
+});
+
+//Aggiunta degli esercizi alla scheda
+router.post('/aggiungiEsercizio', async (req, res) => {
+  const { idScheda, esercizi } = req.body;
+
+  if (!idScheda || !esercizi || esercizi.length === 0) {
+      return res.status(400).json({ error: "Dati mancanti" });
+  }
+
+  const query = 'INSERT INTO schedaesercizi (idScheda, idEsercizio, peso, serie, ripetizioni) VALUES ?';
+  
+  const values = esercizi.map(ex => [idScheda, ex.idEsercizio, ex.peso, ex.serie, ex.ripetizioni]);
+
+  db.query(query, [values], (err) => {
+      if (err) {
+          console.error("Errore nell'inserimento esercizi:", err);
+          return res.status(500).json({ error: "Errore nell'inserimento esercizi" });
+      }
+      res.json({ message: "Esercizi aggiunti con successo" });
+  });
+});
+
+
+// Recupera tutti gli esercizi disponibili
+router.get('/esercizi', async (req, res) => {
+  const query = 'SELECT idEsercizio, nome FROM esercizi'; // Assumendo che ci sia una tabella "esercizi"
+
+  db.query(query, (err, results) => {
+      if (err) {
+          console.error("Errore nel recupero degli esercizi:", err);
+          return res.status(500).json({ error: "Errore nel recupero degli esercizi" });
+      }
+      res.json(results);
+  });
+});
+
 
 export default router;

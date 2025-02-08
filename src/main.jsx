@@ -15,6 +15,7 @@ import DettagliScheda from './pages/DettagliScheda.jsx'
 import Anagrafica from './pages/Anagrafica.jsx'
 import RichiestaScheda from './pages/RichiestaScheda.jsx'
 import GestioneRichieste from './pages/GestioneRichieste.jsx'
+import CreaScheda from './pages/CreaScheda.jsx'
 
 const router = createBrowserRouter([
     {
@@ -79,6 +80,12 @@ const router = createBrowserRouter([
         path:"/gestione-richieste",
         element:(<ProtectedRoute> {/* Avvolgi la rotta dashboard */}
             <GestioneRichieste/>
+            </ProtectedRoute>),
+    },
+    {
+        path:"/crea-scheda/:idUtente",
+        element:(<ProtectedRoute> {/* Avvolgi la rotta dashboard */}
+            <CreaScheda/>
             </ProtectedRoute>),
     }
 

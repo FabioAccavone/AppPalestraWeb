@@ -15,7 +15,6 @@ const RichiestaScheda = () => {
   useEffect(() => {
 
     if(user){
-      console.log(user.id);
       axios.get(`http://localhost:5000/api/richiesta/richiesteUtente/${user.id}`)
       .then(response => setRichieste(response.data))
       .catch(error => console.error("Errore nel recupero delle richieste:", error));

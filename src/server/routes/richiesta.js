@@ -68,4 +68,24 @@ router.post('/nuovaRichiesta', (req, res) => {
     });
 });
 
+//Recupera tutte le richieste fatte ad un determinato PT
+router.get('/richiestePT/:idPT', async (req, res) => {
+    const { idPT } = req.params;
+
+    const query = `
+    SELECT rs.idRichiesta, rs.idUtente, u.nome, u.cognome, rs.stato 
+    FROM richiestescheda rs
+    JOIN utenti u ON rs.idUtente = u.idUtente
+    WHERE rs.idPT = ? AND rs.stato = "in corso"`;
+
+    db.query(query, [idPT], (err, result) => {
+        if (err) {
+            console.error("Errore nel recupero delle richieste:", err);
+            return res.status(500).json({ error: "Errore nel recupero delle richieste" });
+        }
+        res.json(result);
+    });
+});
+
+
 export default router;

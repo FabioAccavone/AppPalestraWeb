@@ -18,7 +18,7 @@ const Login = () => {
     try {
       const response = await axios.post("http://localhost:5000/api/auth/login", credentials);
 
-      login(response.data.token, response.data.role, response.data.idUtente); //  Salva nel context
+      login(response.data.token, response.data.role, response.data.id); //  Salva nel context
         if (response.data.role === 'utente') {
           navigate('/AreaRiservata', { state: { message: 'Login successful Utente!' } });
         } else {
