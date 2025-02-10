@@ -6,7 +6,7 @@ import NavBar from "../components/NavBar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import bcrypt from 'bcryptjs';
-//import './Anagrafica.css';
+import './Anagrafica.css';
 
 const Anagrafica = () => {
   const { user } = useContext(AuthContext);

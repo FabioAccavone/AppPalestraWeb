@@ -1,0 +1,65 @@
+.anagrafica-container {
+    max-width: 400px; /* Ridotto per renderlo più compatto */
+    margin: 80px auto 20px auto; /* Spazio sotto la navbar */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  h2 {
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .user-details p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    color: #444;
+    background: #fff;
+    padding: 8px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-details strong {
+    flex: 1;
+    text-align: left;
+  }
+  
+  .user-details input {
+    flex: 2;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: right;
+    background-color: white; /* Sfondo bianco */
+    color: black; /* Testo nero */
+  }
+  
+  button {
+    margin-top: 15px;
+    padding: 10px 18px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  

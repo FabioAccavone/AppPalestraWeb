@@ -40,7 +40,6 @@ const Login = () => {
     <>
     <NavBar></NavBar>
     <div>
-      <h2>Login</h2>
       <LoginForm onSubmit={handleLogin} /> 
     </div>
     </>
