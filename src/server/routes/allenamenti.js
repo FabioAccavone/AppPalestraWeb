@@ -47,4 +47,30 @@ router.get('/allenamentiDisponibili', (req, res) => {
   });
 });
 
+router.get('/allenamentiDisponibiliModifica', (req, res) => {
+    const { data, idUtente } = req.query;
+
+    const getAllenamentiQuery = `
+      SELECT * FROM allenamenti 
+      WHERE dataAllenamento = ? 
+      AND numPosti > 0;
+    `;
+
+    db.query(getAllenamentiQuery, [data, idUtente], (err, allenamenti) => {
+      if (err) return res.status(500).send('Errore nel recupero degli allenamenti');
+
+      if (allenamenti.length === 0) {
+        return res.json({ message: "Nessun allenamento disponibile per questa data." });
+      }
+
+      const allenamentiFormattati = allenamenti.map((allenamento) => ({
+        ...allenamento,
+        dataAllenamento: new Date(allenamento.dataAllenamento).toLocaleDateString('it-IT'),
+        oraInizio: allenamento.oraInizio.substring(0, 5),
+      }));
+
+      res.json(allenamentiFormattati);
+    });
+});
+
 export default router;

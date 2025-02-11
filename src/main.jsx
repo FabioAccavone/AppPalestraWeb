@@ -84,7 +84,7 @@ const router = createBrowserRouter([
             </ProtectedRoute>),
     },
     {
-        path:"/crea-scheda/:idUtente",
+        path:"/crea-scheda/:idUtente/:idRichiesta",
         element:(<ProtectedRoute> {/* Avvolgi la rotta dashboard */}
             <CreaScheda/>
             </ProtectedRoute>),

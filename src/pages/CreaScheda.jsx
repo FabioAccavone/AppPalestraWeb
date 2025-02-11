@@ -3,9 +3,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import NavBar from '../components/NavBar';
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreaScheda = () => {
-    const { idUtente } = useParams();
+    const { idUtente, idRichiesta } = useParams();
     const { user } = useContext(AuthContext); // PT loggato
     const navigate = useNavigate();
 
@@ -38,7 +40,7 @@ const CreaScheda = () => {
         })
         .then(response => {
             setIdScheda(response.data.idScheda);
-            alert("Scheda creata con successo!");
+            toast.success("Scheda creata con successo!");
         })
         .catch(() => alert("Errore nella creazione della scheda"));
     };
@@ -46,7 +48,7 @@ const CreaScheda = () => {
     // Aggiungi un esercizio alla lista locale
     const handleAggiungiEsercizio = () => {
         if (!idEsercizio || !serie || !ripetizioni) {
-            alert("Compila tutti i campi dell'esercizio!");
+            toast.error("Compila tutti i campi dell'esercizio!");
             return;
         }
 
@@ -70,19 +72,27 @@ const CreaScheda = () => {
     // Invia tutti gli esercizi selezionati al backend
     const handleSalvaScheda = () => {
         if (!idScheda) {
-            alert("Crea prima la scheda!");
+            toast.error("Crea prima la scheda!");
             return;
         }
 
         axios.post("http://localhost:5000/api/schede/aggiungiEsercizio", {
             idScheda,
-            esercizi: eserciziSelezionati
+            esercizi: eserciziSelezionati,
         })
         .then(() => {
-            alert("Scheda completata con successo!");
-            navigate('/gestione-richieste'); // Torna alla gestione richieste
+            // Dopo aver salvato gli esercizi, aggiorna lo stato della richiesta
+        return axios.put(`http://localhost:5000/api/richiesta/update/${idRichiesta}`, {
+            stato: "completata"
+        });
+        
+        })
+        .then(() =>{
+            navigate('/gestione-richieste', { state: { message: "Scheda completata con successo!" } }); // Torna alla gestione richieste
+
         })
         .catch(() => alert("Errore nel salvataggio degli esercizi"));
+
     };
 
     return (
@@ -137,6 +147,7 @@ const CreaScheda = () => {
                     <button onClick={handleSalvaScheda}>Salva Scheda</button>
                 </div>
             )}
+             <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
         </div>
     );
 };

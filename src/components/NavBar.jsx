@@ -53,6 +53,9 @@ function NavBar() {
                 <Link to="/gestione-richieste" className="navbar-link">
                   <button className="navbar-button">Gestisci Richieste</button>
                 </Link>
+                <Link to="/anagrafica" className="navbar-link">
+                  <button className="navbar-button">Anagrafica</button>
+                </Link>
                 <button className="navbar-button navbar-button-logout" onClick={handleLogout}>
                   Logout
                 </button>

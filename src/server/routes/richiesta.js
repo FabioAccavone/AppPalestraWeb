@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/richiesteUtente/:idUtente', async (req, res) => {
     const { idUtente } = req.params;
     const query = `
-    SELECT pt.nome as nome, pt.cognome as cognome, richiestescheda.stato as stato
+    SELECT pt.nome as nome, pt.cognome as cognome, richiestescheda.stato as stato, richiestescheda.dataRichiesta as data
     FROM richiestescheda 
     JOIN pt ON richiestescheda.idPT = pt.idPt
     WHERE Idutente = ?`;
@@ -17,8 +17,11 @@ router.get('/richiesteUtente/:idUtente', async (req, res) => {
             console.error("Errore nel recupero delle schede:", err);
             return res.status(500).json({ error: "Errore nel recupero delle schede" });
         }
-
-        res.json(result);
+       const richiestaFormattata = result.map((richiesta) =>({
+        ...richiesta,
+        dataRichiesta: new Date(richiesta.data).toLocaleDateString('it-IT')
+       }))
+        res.json(richiestaFormattata);
     })
 });
 
@@ -63,7 +66,7 @@ router.post('/nuovaRichiesta', (req, res) => {
                 res.json({ message: "Richiesta creata con successo", idRichiesta: result.insertId });
             });
         } else {
-            res.message(400).json({ error: "Esiste già una richiesta in corso per questo utente" });
+            res.status(400).json({ error: "Hai già una richiesta in corso" });
         }
     });
 });
@@ -71,12 +74,17 @@ router.post('/nuovaRichiesta', (req, res) => {
 //Recupera tutte le richieste fatte ad un determinato PT
 router.get('/richiestePT/:idPT', async (req, res) => {
     const { idPT } = req.params;
-
     const query = `
-    SELECT rs.idRichiesta, rs.idUtente, u.nome, u.cognome, rs.stato 
+    SELECT 
+        rs.idRichiesta, 
+        rs.idUtente, 
+        u.nome, 
+        u.cognome, 
+        rs.stato, 
+        rs.dataRichiesta 
     FROM richiestescheda rs
     JOIN utenti u ON rs.idUtente = u.idUtente
-    WHERE rs.idPT = ? AND rs.stato = "in corso"`;
+    WHERE rs.idPT = ?`;
 
     db.query(query, [idPT], (err, result) => {
         if (err) {
@@ -84,6 +92,27 @@ router.get('/richiestePT/:idPT', async (req, res) => {
             return res.status(500).json({ error: "Errore nel recupero delle richieste" });
         }
         res.json(result);
+    });
+});
+
+
+//Aggiornamento stato richiesta
+router.put('/update/:idRichiesta', async (req, res) => {
+    const { idRichiesta } = req.params;
+    const { stato } = req.body;
+
+    if (!stato) {
+        return res.status(400).json({ error: "Stato mancante" });
+    }
+
+    const query = 'UPDATE richiestescheda SET stato = ? WHERE idRichiesta = ?';
+
+    db.query(query, [stato, idRichiesta], (err, result) => {
+        if (err) {
+            console.error("Errore nell'aggiornamento della richiesta:", err);
+            return res.status(500).json({ error: "Errore nell'aggiornamento della richiesta" });
+        }
+        res.json({ message: "Richiesta aggiornata con successo" });
     });
 });
 

@@ -23,7 +23,7 @@ const ModificaPrenotazione = () => {
       return;
     }
 
-    axios.get(`http://localhost:5000/api/allenamenti/allenamentiDisponibili?data=${selectedDate}&idUtente=${user.id}`)
+    axios.get(`http://localhost:5000/api/allenamenti/allenamentiDisponibiliModifica?data=${selectedDate}&idUtente=${user.id}`)
     .then(response => {
       if (response.data.message) {
         setAllenamenti([]);

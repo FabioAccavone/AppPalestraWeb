@@ -93,7 +93,7 @@ router.get("/dettagliScheda/:idScheda", (req, res) => {
 router.post('/creaScheda', async (req, res) => {
   const { dataInizio, dataFine, idUtente, idPT } = req.body;
 
-  const query = 'INSERT INTO scheda (dataInizio, dataFine, idUtente, idPT) VALUES (?, ?, ?, ?)';
+  const query = 'INSERT INTO schede (dataInizio, dataFine, idUtente, idPT) VALUES (?, ?, ?, ?)';
   
   db.query(query, [dataInizio, dataFine, idUtente, idPT], (err, result) => {
       if (err) {

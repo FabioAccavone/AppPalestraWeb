@@ -52,9 +52,11 @@ const RichiestaScheda = () => {
     axios.post("http://localhost:5000/api/richiesta/nuovaRichiesta", requestData)
     .then(() => {
       toast.success("Richiesta inviata con successo!");
-      setRichieste([...richieste, { Idutente: user.id, IdPt: selectedPT, stato: "in corso" }]);
+       // Creazione della data attuale
+       const dataRichiesta = new Date().toLocaleDateString('it-IT'); // Oppure new Date().toLocaleString() per leggibilità
+      setRichieste([...richieste, { Idutente: user.id, IdPt: selectedPT, stato: "in corso", dataRichiesta}]);
     })
-    .catch(() => toast.error("Errore nell'invio della richiesta"));
+    .catch((error) => toast.info(error.response.data.error));
   };
 
   return (
@@ -66,7 +68,7 @@ const RichiestaScheda = () => {
         <h3>Le mie richieste</h3>
         <ul>
           {richieste.map((richiesta, index) => (
-            <li key={index}>PT: {richiesta.nome} {richiesta.cognome} - Stato: {richiesta.stato}</li>
+            <li key={index}>PT: {richiesta.nome} {richiesta.cognome} - Stato: {richiesta.stato} - Data Richiesta: {richiesta.dataRichiesta} </li>
           ))}
         </ul>
       </div>

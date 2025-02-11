@@ -7,7 +7,6 @@ const LoginForm = ({ onSubmit }) => {
     password: "",
     role: "",
   });
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -15,11 +14,6 @@ const LoginForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!credentials.username || !credentials.password || !credentials.role) {
-      setError("Tutti i campi sono obbligatori");
-      return;
-    }
-    setError("");
     onSubmit(credentials);
   };
 
@@ -66,10 +60,7 @@ const LoginForm = ({ onSubmit }) => {
           <option value="admin">Admin</option>
         </select>
       </div>
-
       <button type="submit">Login</button>
-      
-      {error && <p className="error-message">{error}</p>}
     </form>
   );
 };
