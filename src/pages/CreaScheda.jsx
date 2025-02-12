@@ -5,6 +5,7 @@ import { AuthContext } from '../context/AuthContext';
 import NavBar from '../components/NavBar';
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '../style/CreaScheda.css'
 
 const CreaScheda = () => {
     const { idUtente, idRichiesta } = useParams();
@@ -96,24 +97,24 @@ const CreaScheda = () => {
     };
 
     return (
-        <div>
+        <div className="crea-scheda-container">
             <NavBar />
             <h2>Creazione Scheda per Utente {idUtente}</h2>
-
+    
             {!idScheda ? (
                 <div>
                     <label>Data Inizio:</label>
                     <input type="date" value={dataInizio} onChange={(e) => setDataInizio(e.target.value)} />
-
+    
                     <label>Data Fine:</label>
                     <input type="date" value={dataFine} onChange={(e) => setDataFine(e.target.value)} />
-
-                    <button onClick={handleCreaScheda}>Crea Scheda</button>
+    
+                    <button className="button-crea" onClick={handleCreaScheda}>Crea Scheda</button>
                 </div>
             ) : (
                 <div>
                     <h3>Aggiungi Esercizi alla Scheda</h3>
-
+    
                     <label>Seleziona Esercizio:</label>
                     <select value={idEsercizio} onChange={(e) => setIdEsercizio(e.target.value)}>
                         <option value="">-- Seleziona un esercizio --</option>
@@ -123,33 +124,34 @@ const CreaScheda = () => {
                             </option>
                         ))}
                     </select>
-
+    
                     <label>Peso:</label>
                     <input type="number" value={peso} onChange={(e) => setPeso(e.target.value)} />
-
+    
                     <label>Serie:</label>
                     <input type="number" value={serie} onChange={(e) => setSerie(e.target.value)} />
-
+    
                     <label>Ripetizioni:</label>
                     <input type="number" value={ripetizioni} onChange={(e) => setRipetizioni(e.target.value)} />
-
-                    <button onClick={handleAggiungiEsercizio}>Aggiungi Esercizio</button>
-
+    
+                    <button className="button-aggiungi" onClick={handleAggiungiEsercizio}>Aggiungi Esercizio</button>
+    
                     <h4>Esercizi Selezionati:</h4>
-                    <ul>
+                    <ul className="esercizi-list">
                         {eserciziSelezionati.map((ex, index) => (
                             <li key={index}>
                                 {ex.nome} - {ex.peso} kg - {ex.serie} serie - {ex.ripetizioni} ripetizioni
                             </li>
                         ))}
                     </ul>
-
-                    <button onClick={handleSalvaScheda}>Salva Scheda</button>
+    
+                    <button className="button-salva" onClick={handleSalvaScheda}>Salva Scheda</button>
                 </div>
             )}
-             <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+            <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
         </div>
     );
+    
 };
 
 export default CreaScheda;

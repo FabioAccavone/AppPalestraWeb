@@ -5,6 +5,7 @@ import { AuthContext } from '../context/AuthContext';
 import NavBar from '../components/NavBar';
 import { ToastContainer, toast } from 'react-toastify';  // Importa
 import 'react-toastify/dist/ReactToastify.css'; // Stili
+import '../style/GestioneRichieste.css'
 
 const GestioneRichieste = () => {
   const { user } = useContext(AuthContext); // PT loggato
@@ -42,7 +43,7 @@ const GestioneRichieste = () => {
   };
 
   return (
-    <div>
+    <div className="gestione-container">
       <NavBar />
       <h2>Gestione Richieste</h2>
 
@@ -64,7 +65,7 @@ const GestioneRichieste = () => {
               <td>{new Date(richiesta.dataRichiesta).toLocaleDateString()}</td>
               <td>{richiesta.stato}</td>
               <td>
-                <button onClick={() => handleGestisciRichiesta(richiesta.idUtente, richiesta.idRichiesta)}>
+                <button className="button-gestisci" onClick={() => handleGestisciRichiesta(richiesta.idUtente, richiesta.idRichiesta)}>
                   Gestisci Richiesta
                 </button>
               </td>
