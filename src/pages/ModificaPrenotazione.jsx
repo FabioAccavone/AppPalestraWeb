@@ -5,7 +5,7 @@ import { AuthContext } from '../context/AuthContext';
 import NavBar from "../components/NavBar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import './ModificaPrenotazione.css'
+import '../style/ModificaPrenotazione.css'
 
 const ModificaPrenotazione = () => {
   const { idPrenotazione } = useParams();

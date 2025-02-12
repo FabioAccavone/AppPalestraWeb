@@ -2,7 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext'; // Importa il contesto
-import './NavBar.css';  // Importa il file CSS
+import '../style/NavBar.css';  // Importa il file CSS
 import logo from '../assets/logo.svg'; // Assicurati di avere il logo in questa directory
 
 function NavBar() {

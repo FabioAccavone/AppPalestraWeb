@@ -1,5 +1,5 @@
 import React from 'react'
-import './App.css'
+import './style/App.css'
 import NavBar from './components/NavBar'
 import { useLocation } from 'react-router-dom';
 import { useEffect,useState } from 'react';

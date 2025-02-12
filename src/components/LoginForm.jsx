@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./LoginForm.css"; // Importa il CSS
+import "../style/LoginForm.css"; // Importa il CSS
 
 const LoginForm = ({ onSubmit }) => {
   const [credentials, setCredentials] = useState({

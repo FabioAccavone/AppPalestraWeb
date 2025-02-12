@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './Allenamenti.css'; // Importa un file CSS separato
+import '../style/Allenamenti.css'; // Importa un file CSS separato
 import AllenamentoCard from '../components/AllenamentoCard';
 
 const Allenamenti = () => {

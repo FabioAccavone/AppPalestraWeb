@@ -1,0 +1,121 @@
+/* Contenitore principale */
+.richiesta-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #1e1e1e;
+    color: white;
+    padding-top: 100px; /* Per evitare sovrapposizione con la navbar */
+  }
+  
+  /* Titolo principale */
+  h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ccc;
+  }
+  
+  /* Sezione richieste */
+  .richieste-box {
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    padding: 20px;
+    width: 50%;
+    min-width: 350px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  /* Titolo richieste */
+  .richieste-box h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
+    display: inline-block;
+  }
+  
+  /* Lista richieste */
+  .richieste-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+  
+  /* Singola richiesta */
+  .richiesta-item {
+    background-color: #f0f0f0;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+  }
+  
+  .richiesta-item:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Sezione nuova richiesta */
+  .nuova-richiesta-box {
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    padding: 20px;
+    width: 50%;
+    min-width: 350px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  /* Label */
+  .nuova-richiesta-box label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  /* Select per i PT */
+  .select-pt {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 2px solid #3498db;
+    outline: none;
+    transition: border 0.3s ease;
+    background-color: white;
+    color: black;
+  }
+  
+  .select-pt:focus {
+    border-color: #2980b9;
+  }
+  
+  /* Bottone invia richiesta */
+  .button-invia {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  .button-invia:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  

@@ -4,6 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NavBar from '../components/NavBar';
+import '../style/RichiestaScheda.css'
 
 const RichiestaScheda = () => {
   const { user } = useContext(AuthContext);
@@ -20,7 +21,7 @@ const RichiestaScheda = () => {
       .catch(error => console.error("Errore nel recupero delle richieste:", error));
     }
 
-  }, [user]);
+  }, [user, richieste]);
 
   // Carica la lista dei PT
   useEffect(() => {
@@ -52,42 +53,52 @@ const RichiestaScheda = () => {
     axios.post("http://localhost:5000/api/richiesta/nuovaRichiesta", requestData)
     .then(() => {
       toast.success("Richiesta inviata con successo!");
-       // Creazione della data attuale
-       const dataRichiesta = new Date().toLocaleDateString('it-IT'); // Oppure new Date().toLocaleString() per leggibilità
-      setRichieste([...richieste, { Idutente: user.id, IdPt: selectedPT, stato: "in corso", dataRichiesta}]);
+       //e([...richieste, { Idutente: user.id, nomePt: selectedPT, stato: "in corso", dataRichiesta}]);
     })
     .catch((error) => toast.info(error.response.data.error));
   };
 
   return (
-    <div>
+    <div className="richiesta-container">
       <NavBar />
       <h2>Richiesta Schede</h2>
-
-      <div>
+  
+      {/* BOX LE MIE RICHIESTE */}
+      <div className="richieste-box">
         <h3>Le mie richieste</h3>
-        <ul>
+        <ul className="richieste-list">
           {richieste.map((richiesta, index) => (
-            <li key={index}>PT: {richiesta.nome} {richiesta.cognome} - Stato: {richiesta.stato} - Data Richiesta: {richiesta.dataRichiesta} </li>
+            <li key={index} className="richiesta-item">
+              PT: {richiesta.nome} {richiesta.cognome} - 
+              Stato: {richiesta.stato} - 
+              Data Richiesta: {richiesta.dataRichiesta}
+            </li>
           ))}
         </ul>
       </div>
-
-      <div>
+  
+      {/* BOX NUOVA RICHIESTA */}
+      <div className="nuova-richiesta-box">
         <h3>Nuova richiesta</h3>
         <label>Seleziona un personal trainer:</label>
-        <select value={selectedPT} onChange={(e) => setSelectedPT(e.target.value)}>
+        <select
+          className="select-pt"
+          value={selectedPT}
+          onChange={(e) => setSelectedPT(e.target.value)}
+        >
           <option value="">-- Seleziona un PT --</option>
-          {personalTrainers.map(pt => (
+          {personalTrainers.map((pt) => (
             <option key={pt.IdPt} value={pt.IdPt}>
               {pt.nome} {pt.cognome}
             </option>
           ))}
         </select>
-
-        <button onClick={handleSubmit}>Invia richiesta</button>
+  
+        <button className="button-invia" onClick={handleSubmit}>
+          Invia richiesta
+        </button>
       </div>
-
+  
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
     </div>
   );

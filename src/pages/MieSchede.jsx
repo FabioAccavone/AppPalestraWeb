@@ -3,7 +3,7 @@ import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import "./MieSchede.css"; // Stili CSS
+import "../style/MieSchede.css"; // Stili CSS
 
 const MieSchede = () => {
   const [schede, setSchede] = useState([]);

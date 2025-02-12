@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import "./DettagliScheda.css"; // Stili CSS
+import "../style/DettagliScheda.css"; // Stili CSS
 
 const DettagliScheda = () => {
   const { idScheda } = useParams();
