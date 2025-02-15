@@ -38,7 +38,7 @@ function NavBar() {
                 <Link to="/schede" className="navbar-link">
                   <button className="navbar-button">Schede</button>
                 </Link>
-                <Link to="/anagrafica" className="navbar-link">
+                <Link to="/anagraficaUtente" className="navbar-link">
                   <button className="navbar-button">Anagrafica</button>
                 </Link>
                 <Link to="/richiesta-scheda" className="navbar-link">
@@ -53,7 +53,7 @@ function NavBar() {
                 <Link to="/gestione-richieste" className="navbar-link">
                   <button className="navbar-button">Gestisci Richieste</button>
                 </Link>
-                <Link to="/anagrafica" className="navbar-link">
+                <Link to="/anagraficaPT" className="navbar-link">
                   <button className="navbar-button">Anagrafica</button>
                 </Link>
                 <button className="navbar-button navbar-button-logout" onClick={handleLogout}>

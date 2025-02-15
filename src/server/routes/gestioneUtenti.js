@@ -61,7 +61,7 @@ router.put('/modificaUtente/:idUtente', (req, res) => {
   const { nome, cognome, dataNascita, username, peso, dataInizioAbb, dataFineAbb } = req.body;
 
   const query = 'UPDATE utenti SET nome = ?, cognome = ?,dataNascita=?, username = ?, peso = ?, dataInizioAbb = ?, dataFineAbb = ? WHERE idUtente = ?';
-  db.query(query, [nome, cognome, dataNascita, username, peso, dataInizioAbb, dataFineAbb, idUtente], (err, result) => {
+  db.query(query, [nome, cognome, dataNascita, username, peso, dataInizioAbb, dataFineAbb, idUtente], (err) => {
     if (err) {
       console.error("Errore nell'aggiornamento dell'utente:", err);
       return res.status(500).json({ error: "Errore nell'aggiornamento dell'utente" });
@@ -76,7 +76,7 @@ router.delete('/eliminaUtente/:idUtente', (req, res) => {
   const { idUtente } = req.params;
 
   const query = 'DELETE FROM utenti WHERE idUtente = ?';
-  db.query(query, [idUtente], (err, result) => {
+  db.query(query, [idUtente], (err) => {
     if (err) {
       console.error("Errore nell'eliminazione dell'utente:", err);
       return res.status(500).json({ error: "Errore nell'eliminazione dell'utente" });

@@ -12,11 +12,12 @@ import Prenotazioni from './pages/Prenotazioni.jsx'
 import ModificaPrenotazione from './pages/ModificaPrenotazione.jsx'
 import MieSchede from './pages/MieSchede.jsx'
 import DettagliScheda from './pages/DettagliScheda.jsx'
-import Anagrafica from './pages/Anagrafica.jsx'
 import RichiestaScheda from './pages/RichiestaScheda.jsx'
 import GestioneRichieste from './pages/GestioneRichieste.jsx'
 import CreaScheda from './pages/CreaScheda.jsx'
 import GestioneUtenti from './pages/GestioneUtenti.jsx'
+import AnagraficaUtente from './pages/AnagraficaUtente.jsx'
+import AnagraficaPT from './pages/AnagraficaPT.jsx'
 
 const router = createBrowserRouter([
     {
@@ -66,9 +67,15 @@ const router = createBrowserRouter([
             </ProtectedRoute>),
     },
     {
-        path:"/anagrafica",
+        path:"/anagraficaUtente",
         element:(<ProtectedRoute> {/* Avvolgi la rotta dashboard */}
-            <Anagrafica/>
+            <AnagraficaUtente/>
+            </ProtectedRoute>),
+    },
+    {
+        path:"/anagraficaPT",
+        element:(<ProtectedRoute> {/* Avvolgi la rotta dashboard */}
+            <AnagraficaPT/>
             </ProtectedRoute>),
     },
     {

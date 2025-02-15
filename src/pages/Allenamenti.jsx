@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react';
+import {  useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,7 +12,6 @@ const Allenamenti = () => {
 
   const [allenamenti, setAllenamenti] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
-  const [hasSearched, setHasSearched] = useState(false); // Nuovo stato per controllare se è stata fatta una ricerca
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 

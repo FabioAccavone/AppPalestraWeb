@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../context/AuthContext';
 import NavBar from "../components/NavBar";
 import { ToastContainer, toast } from "react-toastify";
@@ -8,17 +7,16 @@ import "react-toastify/dist/ReactToastify.css";
 import bcrypt from 'bcryptjs';
 import '../style/Anagrafica.css';
 
-const Anagrafica = () => {
+const AnagraficaUtente = () => {
   const { user } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
   const [newPassword, setNewPassword] = useState('');
   const [newPeso, setNewPeso] = useState('');
-  const navigate = useNavigate();
 
   useEffect(() => {
     if(user){
       // Carica i dati dell'utente
-    axios.get(`http://localhost:5000/api/utente/dati?idUtente=${user.id}`)
+    axios.get(`http://localhost:5000/api/utente/datiUtente?idUtente=${user.id}`)
     .then(response => {
       setUserData(response.data);
     })
@@ -44,7 +42,7 @@ const Anagrafica = () => {
     }
 
 
-    axios.put('http://localhost:5000/api/utente/aggiorna', updatedData)
+    axios.put('http://localhost:5000/api/utente/aggiornaUtente', updatedData)
       .then(() => {
         toast.success('Dati aggiornati con successo!');
       })
@@ -86,4 +84,4 @@ const Anagrafica = () => {
   );
 };
 
-export default Anagrafica;
+export default AnagraficaUtente;
