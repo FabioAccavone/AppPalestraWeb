@@ -18,6 +18,7 @@ import CreaScheda from './pages/CreaScheda.jsx'
 import GestioneUtenti from './pages/GestioneUtenti.jsx'
 import AnagraficaUtente from './pages/AnagraficaUtente.jsx'
 import AnagraficaPT from './pages/AnagraficaPT.jsx'
+import GestionePT from './pages/GestionePT.jsx'
 
 const router = createBrowserRouter([
     {
@@ -100,6 +101,12 @@ const router = createBrowserRouter([
         path:"/gestione-utenti",
         element:(<ProtectedRoute> {/* Avvolgi la rotta dashboard */}
             <GestioneUtenti/>
+            </ProtectedRoute>),
+    },
+    {
+        path:"/gestione-pt",
+        element:(<ProtectedRoute> {/* Avvolgi la rotta dashboard */}
+            <GestionePT/>
             </ProtectedRoute>),
     }
 

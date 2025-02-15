@@ -86,4 +86,50 @@ router.delete('/eliminaUtente/:idUtente', (req, res) => {
   });
 });
 
+// Ottieni tutti i PT
+router.get('/trainers', (req, res) => {
+  const query = 'SELECT * FROM pt';
+  db.query(query, (err, results) => {
+    if (err) return res.status(500).json({ error: "Errore nel recupero dei PT" });
+    res.json(results);
+  });
+});
+
+// Crea un nuovo PT
+router.post('/creaTrainer', (req, res) => {
+  const { nome, cognome, dataAssunzione, username, disponibilita, password  } = req.body;
+  console.log(req.body);
+  bcrypt.hash(password, 10, (err, hashedPassword) => {
+    if (err) return res.status(500).json({ error: "Errore nella cifratura della password" });
+
+    const query = 'INSERT INTO pt (Nome, Cognome, dataAssunzione, username, password, disponibilità) VALUES (?, ?, ?, ?, ?, ?)';
+    db.query(query, [nome, cognome, dataAssunzione, username, hashedPassword, disponibilita], (err) => {
+      if (err) return res.status(500).json({ error: "Errore nella creazione del PT" });
+      res.status(201).json({ message: 'PT creato con successo' });
+    });
+  });
+});
+
+// Modifica un PT
+router.put('/modificaTrainer/:idPT', (req, res) => {
+  const { idPT } = req.params;
+  const { nome, cognome, dataAssunzione, username, disponibilita } = req.body;
+
+  const query = 'UPDATE pt SET Nome=?, Cognome=?, dataAssunzione=?, username=?, disponibilità=? WHERE idPT=?';
+  db.query(query, [nome, cognome, dataAssunzione, username, disponibilita, idPT], (err) => {
+    if (err) return res.status(500).json({ error: "Errore nell'aggiornamento del PT" });
+    res.json({ message: 'PT aggiornato con successo' });
+  });
+});
+
+// Elimina un PT
+router.delete('/eliminaTrainer/:idPT', (req, res) => {
+  const { idPT } = req.params;
+
+  db.query('DELETE FROM pt WHERE idPT=?', [idPT], (err) => {
+    if (err) return res.status(500).json({ error: "Errore nell'eliminazione del PT" });
+    res.json({ message: 'PT eliminato con successo' });
+  });
+});
+
 export default router;
