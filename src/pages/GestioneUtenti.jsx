@@ -47,16 +47,17 @@ const GestioneUtenti = () => {
         axios.put(`http://localhost:5000/api/gestione-utente/modificaUtente/${editingUser}`, userData)
         .then(() => {
           toast.success("Utente modificato correttamente");
+          fetchUtenti();
         }) // Mostra una notifica
         .catch(error => console.error('Errore nella modifica dell utente', error));
       } else {
         axios.post('http://localhost:5000/api/gestione-utente/creaUtente', userData)
         .then(() => {
           toast.success("Utente inserito correttamente");
+          fetchUtenti();
         }) // Mostra una notifica
         .catch(error => console.error('Errore nella creazione dell utente:', error));;
       }
-      fetchUtenti();
     } catch (error) {
       alert('Errore nella creazione o modifica dell\'utente');
     }
@@ -65,18 +66,18 @@ const GestioneUtenti = () => {
 
   // Funzione per modificare un utente
   const handleEdit = (user) => {
-    setNome(user.nome); // Attenzione alle maiuscole!
-    setCognome(user.cognome);
+    setNome(user.nome || ''); // Valore di fallback
+    setCognome(user.cognome || '');
     
-    // Converti la data nel formato yyyy-mm-dd per il campo input date
     setdataNascita(user.dataNascita ? new Date(user.dataNascita).toISOString().split('T')[0] : '');
     setdataInizioAbb(user.dataInizioAbb ? new Date(user.dataInizioAbb).toISOString().split('T')[0] : '');
     setdataFineAbb(user.dataFineAbb ? new Date(user.dataFineAbb).toISOString().split('T')[0] : '');
-
-    setUsername(user.username);
-    setPeso(user.peso);
+  
+    setUsername(user.username || '');
+    setPeso(user.peso || 0);
     setEditingUser(user.idUtente); // ✅ Assicurati di salvare l'ID
   };
+  
   
 
   // Funzione per eliminare un utente
@@ -196,6 +197,7 @@ const GestioneUtenti = () => {
           )}
         </tbody>
       </table>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
     </div>
   );
 };
