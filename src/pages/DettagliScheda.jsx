@@ -30,7 +30,7 @@ const DettagliScheda = () => {
         <strong>Personal Trainer:</strong> {dettagli.nomePT} {dettagli.cognomePT}
       </p>
       <p className="date-info">
-        <strong>Data Inizio:</strong> {new Date(dettagli.dataInizio).toLocaleDateString()} - <strong>Data Fine:</strong> {new Date(dettagli.dataFine).toLocaleDateString()}
+        <strong>Data Inizio:</strong> {dettagli.dataInizio} - <strong>Data Fine:</strong> {dettagli.dataFine}
       </p>
 
       <h3>Esercizi</h3>

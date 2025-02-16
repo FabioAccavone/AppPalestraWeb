@@ -1,122 +1,168 @@
 /* Contenitore principale */
 .crea-scheda-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #1e1e1e;
-    color: white;
-    padding-top: 100px;
-  }
-  
-  /* Titoli */
-  h2 {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #ccc;
-    text-align: center;
-  }
-  
-  h3 {
-    font-size: 22px;
-    font-weight: bold;
-    margin: 20px 0;
-    color: #ddd;
-    border-bottom: 2px solid #3498db;
-    display: inline-block;
-    padding-bottom: 5px;
-  }
-  
-  /* Form */
-  label {
-    display: block;
-    margin-top: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #ccc;
-  }
-  
-  input, select {
-    width: 100%;
-    max-width: 400px;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background-color: #2e2e2e;
-    color: white;
-    font-size: 16px;
-  }
-  
-  input:focus, select:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
-  }
-  
-  /* Bottoni */
-  button {
-    margin-top: 15px;
-    padding: 10px 15px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  button:hover {
-    transform: scale(1.05);
-  }
-  
-  /* Pulsante Crea Scheda */
-  .button-crea {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .button-crea:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Pulsante Aggiungi Esercizio */
-  .button-aggiungi {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .button-aggiungi:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Pulsante Salva Scheda */
-  .button-salva {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .button-salva:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Lista esercizi selezionati */
-  .esercizi-list {
-    margin-top: 15px;
-    list-style: none;
-    padding: 0;
-  }
-  
-  .esercizi-list li {
-    background: #333;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-    font-size: 16px;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #1e1e1e;
+  color: white;
+  padding-top: 100px;
+}
+
+/* Titoli */
+h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ccc;
+  text-align: center;
+}
+
+h3 {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 20px 0;
+  color: #ddd;
+  border-bottom: 2px solid #3498db;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+/* Contenitore input */
+.form-group {
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Label */
+label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ccc;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Input e select */
+input {
+  width: 90%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #2e2e2e;
+  color: white;
+  font-size: 14px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+select {
+  width: 95%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #2e2e2e;
+  color: white;
+  font-size: 14px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Bottoni */
+button {
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.03);
+}
+
+/* Pulsante Crea Scheda */
+.button-crea {
+  background-color: #007bff;
+  color: white;
+}
+
+.button-crea:hover {
+  background-color: #0056b3;
+}
+
+/* Pulsante Aggiungi Esercizio */
+.button-aggiungi {
+  background-color: #007bff;
+  color: white;
+}
+
+.button-aggiungi:hover {
+  background-color: #0056b3;
+}
+
+/* Pulsante Salva Scheda */
+.button-salva {
+  background-color: #007bff;
+  color: white;
+}
+
+.button-salva:hover {
+  background-color: #0056b3;
+}
+
+/* Lista esercizi selezionati */
+.esercizi-list {
+  margin-top: 15px;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  max-width: 400px;
+}
+
+.esercizi-list li {
+  background: #333;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 5px;
+  font-size: 14px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Bottoni più piccoli per modifica ed eliminazione */
+.button-modifica,
+.button-elimina {
+  padding: 5px 10px;
+  font-size: 12px;
+  margin-left: 5px;
+  border-radius: 4px;
+}
+
+.button-modifica {
+  background-color: #f39c12;
+  color: white;
+}
+
+.button-modifica:hover {
+  background-color: #d68910;
+}
+
+.button-elimina {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.button-elimina:hover {
+  background-color: #c0392b;
+}
