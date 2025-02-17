@@ -30,7 +30,7 @@ const Login = () => {
         }
           
     } catch (error) {
-      setError('Invalid credentials');
+      toast.error('Invalid credentials');
     }
 
   };
@@ -41,6 +41,7 @@ const Login = () => {
     <div>
       <LoginForm onSubmit={handleLogin} /> 
       {error && <p className="error-message">{error}</p>}
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
     </div>
     </>
   );
