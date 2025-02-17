@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from '../context/AuthContext';
-import NavBar from "../components/NavBar";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
+import React, { useState, useEffect } from 'react'; 
+import axios from 'axios'; 
+import { useNavigate } from "react-router-dom"; 
+import { AuthContext } from '../context/AuthContext'; 
+import NavBar from "../components/NavBar"; 
+import { ToastContainer, toast } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css"; 
 
 const GestioneUtenti = () => {
+  // Stato per memorizzare gli utenti, i dati del form e l'utente che si sta modificando
   const [utenti, setUtenti] = useState([]);
   const [nome, setNome] = useState('');
   const [cognome, setCognome] = useState('');
@@ -17,79 +17,77 @@ const GestioneUtenti = () => {
   const [peso, setPeso] = useState('');
   const [dataInizioAbb, setdataInizioAbb] = useState('');
   const [dataFineAbb, setdataFineAbb] = useState('');
-  const [editingUser, setEditingUser] = useState(null); // Per sapere se stiamo modificando un utente
+  const [editingUser, setEditingUser] = useState(null); // Stato per sapere se stiamo modificando un utente
 
-  // Funzione per recuperare gli utenti
-
-  const fetchUtenti = () =>{
-
+  // Funzione per recuperare gli utenti dal server
+  const fetchUtenti = () => {
     const response = axios.get('http://localhost:5000/api/gestione-utente/utenti')
-      .then(response =>setUtenti(response.data))
-      .catch(error=>console.error("errore nel recupero delle richieste",error));
-  }
+      .then(response => setUtenti(response.data)) // Imposta lo stato degli utenti
+      .catch(error => console.error("errore nel recupero delle richieste", error)); // Gestisce gli errori
+  };
+
   // Effettua il fetch degli utenti quando il componente viene caricato
   useEffect(() => {
-        fetchUtenti();
+    fetchUtenti();
   }, []);
 
   // Funzione per creare o modificare un utente
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevenzione del comportamento predefinito del form
   
+    // Crea l'oggetto con i dati dell'utente
     const userData = { nome, cognome, dataNascita, username, password, peso, dataInizioAbb, dataFineAbb };
-  
-    if (password) {  // Invia la password solo se è stata modificata
+
+    // Se la password è stata modificata, la invia
+    if (password) {
       userData.password = password;
     }
-  
+
     try {
+      // Se stiamo modificando un utente esistente
       if (editingUser) {
         axios.put(`http://localhost:5000/api/gestione-utente/modificaUtente/${editingUser}`, userData)
-        .then(() => {
-          toast.success("Utente modificato correttamente");
-          fetchUtenti();
-        }) // Mostra una notifica
-        .catch(error => console.error('Errore nella modifica dell utente', error));
+          .then(() => {
+            toast.success("Utente modificato correttamente"); // Notifica di successo
+            fetchUtenti(); // Ricarica la lista degli utenti
+          })
+          .catch(error => console.error('Errore nella modifica dell utente', error));
       } else {
+        // Se stiamo creando un nuovo utente
         axios.post('http://localhost:5000/api/gestione-utente/creaUtente', userData)
-        .then(() => {
-          toast.success("Utente inserito correttamente");
-          fetchUtenti();
-        }) // Mostra una notifica
-        .catch(error => console.error('Errore nella creazione dell utente:', error));;
+          .then(() => {
+            toast.success("Utente inserito correttamente"); // Notifica di successo
+            fetchUtenti(); // Ricarica la lista degli utenti
+          })
+          .catch(error => console.error('Errore nella creazione dell utente:', error));
       }
     } catch (error) {
-      alert('Errore nella creazione o modifica dell\'utente');
+      alert('Errore nella creazione o modifica dell\'utente'); // Gestisce errori generali
     }
   };
-  
 
   // Funzione per modificare un utente
   const handleEdit = (user) => {
-    setNome(user.nome || ''); // Valore di fallback
+    setNome(user.nome || ''); // Imposta il nome con fallback se il valore è vuoto
     setCognome(user.cognome || '');
-    
-    setdataNascita(user.dataNascita ? new Date(user.dataNascita).toISOString().split('T')[0] : '');
+    setdataNascita(user.dataNascita ? new Date(user.dataNascita).toISOString().split('T')[0] : ''); // Converte la data in formato ISO
     setdataInizioAbb(user.dataInizioAbb ? new Date(user.dataInizioAbb).toISOString().split('T')[0] : '');
     setdataFineAbb(user.dataFineAbb ? new Date(user.dataFineAbb).toISOString().split('T')[0] : '');
-  
     setUsername(user.username || '');
     setPeso(user.peso || 0);
-    setEditingUser(user.idUtente); // ✅ Assicurati di salvare l'ID
+    setEditingUser(user.idUtente); // Imposta l'utente che si sta modificando
   };
-  
-  
 
   // Funzione per eliminare un utente
   const handleDelete = async (idUtente) => {
-    const confirmDelete = window.confirm('Sei sicuro di voler eliminare questo utente?');
+    const confirmDelete = window.confirm('Sei sicuro di voler eliminare questo utente?'); // Conferma dell'eliminazione
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:5000/api/gestione-utente/eliminaUtente/${idUtente}`);
+        await axios.delete(`http://localhost:5000/api/gestione-utente/eliminaUtente/${idUtente}`); // Elimina l'utente dal server
         alert('Utente eliminato con successo');
-        fetchUtenti();
+        fetchUtenti(); // Ricarica la lista degli utenti
       } catch (error) {
-        console.error('Errore nell\'eliminazione dell\'utente', error);
+        console.error('Errore nell\'eliminazione dell\'utente', error); // Gestisce gli errori
         alert('Si è verificato un errore');
       }
     }
@@ -97,10 +95,10 @@ const GestioneUtenti = () => {
 
   return (
     <div>
-      <NavBar/>
+      <NavBar /> {/* Barra di navigazione */}
       <h2>Gestione Utenti</h2>
 
-      {/* Form di creazione e modifica utente */}
+      {/* Form per creare e modificare un utente */}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -135,7 +133,7 @@ const GestioneUtenti = () => {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          required={!editingUser} // Se stiamo modificando un utente, non richiediamo la password
+          required={!editingUser} // La password è obbligatoria solo se stiamo creando un nuovo utente
         />
         <input
           type="number"
@@ -156,7 +154,7 @@ const GestioneUtenti = () => {
           onChange={(e) => setdataFineAbb(e.target.value)}
           required
         />
-        <button type="submit">{editingUser ? 'Aggiorna Utente' : 'Crea Utente'}</button>
+        <button type="submit">{editingUser ? 'Aggiorna Utente' : 'Crea Utente'}</button> {/* Cambia il testo del bottone in base alla modifica o creazione */}
       </form>
 
       {/* Tabella degli utenti */}
@@ -165,7 +163,7 @@ const GestioneUtenti = () => {
           <tr>
             <th>Nome</th>
             <th>Cognome</th>
-            <th>dataNascita</th>
+            <th>Data di Nascita</th>
             <th>Username</th>
             <th>Peso</th>
             <th>Data Inizio Abbonamento</th>
@@ -179,25 +177,25 @@ const GestioneUtenti = () => {
               <tr key={utente.idUtente}>
                 <td>{utente.Nome}</td>
                 <td>{utente.Cognome}</td>
-                <td>{new Date(utente.dataNascita).toLocaleDateString('it-IT')}</td>
+                <td>{new Date(utente.dataNascita).toLocaleDateString('it-IT')}</td> {/* Formattazione della data */}
                 <td>{utente.username}</td>
                 <td>{utente.peso}</td>
-                <td>{new Date(utente.dataInizioAbb).toLocaleDateString('it-IT')}</td>
-                <td>{new Date(utente.dataFineAbb).toLocaleDateString('it-IT')}</td>
+                <td>{new Date(utente.dataInizioAbb).toLocaleDateString('it-IT')}</td> {/* Formattazione della data */}
+                <td>{new Date(utente.dataFineAbb).toLocaleDateString('it-IT')}</td> {/* Formattazione della data */}
                 <td>
-                  <button onClick={() => handleEdit(utente)}>Modifica</button>
-                  <button onClick={() => handleDelete(utente.idUtente)}>Elimina</button>
+                  <button onClick={() => handleEdit(utente)}>Modifica</button> {/* Modifica utente */}
+                  <button onClick={() => handleDelete(utente.idUtente)}>Elimina</button> {/* Elimina utente */}
                 </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="8">Nessun utente trovato</td>
+              <td colSpan="8">Nessun utente trovato</td> {/* Messaggio se non ci sono utenti */}
             </tr>
           )}
         </tbody>
       </table>
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} /> {/* Container per le notifiche */}
     </div>
   );
 };

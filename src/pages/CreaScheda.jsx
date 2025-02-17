@@ -3,27 +3,29 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import NavBar from '../components/NavBar';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import '../style/CreaScheda.css';
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
+import '../style/CreaScheda.css'; 
 
 const CreaScheda = () => {
+    // Estrae i parametri della URL (idUtente, idRichiesta)
     const { idUtente, idRichiesta } = useParams();
-    const { user } = useContext(AuthContext); // PT loggato
-    const navigate = useNavigate();
+    const { user } = useContext(AuthContext); // Ottieni i dati del PT loggato
+    const navigate = useNavigate(); // Funzione di navigazione
 
+    // Stati per gestire i vari dati nel form
     const [dataInizio, setDataInizio] = useState('');
     const [dataFine, setDataFine] = useState('');
     const [idScheda, setIdScheda] = useState(null);
     const [eserciziDisponibili, setEserciziDisponibili] = useState([]);
     const [eserciziSelezionati, setEserciziSelezionati] = useState([]);
-    
-    // Stato per il form dell'esercizio
+
+    // Stati per la gestione del form dell'esercizio
     const [idEsercizio, setIdEsercizio] = useState('');
     const [peso, setPeso] = useState('');
     const [serie, setSerie] = useState('');
     const [ripetizioni, setRipetizioni] = useState('');
-    const [editingIndex, setEditingIndex] = useState(null); // Indice dell'esercizio in modifica
+    const [editingIndex, setEditingIndex] = useState(null); // Indice dell'esercizio da modificare
 
     // Recupera la lista degli esercizi disponibili
     useEffect(() => {
@@ -32,7 +34,7 @@ const CreaScheda = () => {
             .catch(error => console.error("Errore nel recupero degli esercizi:", error));
     }, []);
 
-    // Funzione per creare una nuova scheda
+    // Funzione per creare la scheda
     const handleCreaScheda = () => {
         axios.post("http://localhost:5000/api/schede/creaScheda", {
             dataInizio,
@@ -41,16 +43,16 @@ const CreaScheda = () => {
             idPT: user.id
         })
         .then(response => {
-            setIdScheda(response.data.idScheda);
-            toast.success("Scheda creata con successo!");
+            setIdScheda(response.data.idScheda); // Imposta l'id della scheda creata
+            toast.success("Scheda creata con successo!"); // Mostra un messaggio di successo
         })
-        .catch(() => toast.error("Errore nella creazione della scheda"));
+        .catch(() => toast.error("Errore nella creazione della scheda")); // Mostra un errore in caso di fallimento
     };
 
-    // Aggiungi un esercizio o modifica uno esistente
+    // Funzione per aggiungere o modificare un esercizio
     const handleAggiungiOmodificaEsercizio = () => {
         if (!idEsercizio || !serie || !ripetizioni) {
-            toast.error("Compila tutti i campi dell'esercizio!");
+            toast.error("Compila tutti i campi dell'esercizio!"); // Errore se i campi non sono compilati
             return;
         }
 
@@ -64,13 +66,13 @@ const CreaScheda = () => {
         };
 
         if (editingIndex !== null) {
-            // Modifica esercizio esistente
+            // Modifica un esercizio esistente
             const nuovaLista = [...eserciziSelezionati];
             nuovaLista[editingIndex] = nuovoEsercizio;
             setEserciziSelezionati(nuovaLista);
             toast.success("Esercizio modificato con successo!");
         } else {
-            // Aggiungi nuovo esercizio
+            // Aggiungi un nuovo esercizio
             setEserciziSelezionati([...eserciziSelezionati, nuovoEsercizio]);
             toast.success("Esercizio aggiunto!");
         }
@@ -79,7 +81,7 @@ const CreaScheda = () => {
         resetForm();
     };
 
-    // Imposta i dati dell'esercizio da modificare nel form
+    // Funzione per modificare un esercizio
     const handleModificaEsercizio = (index) => {
         const esercizio = eserciziSelezionati[index];
         setIdEsercizio(esercizio.idEsercizio);
@@ -89,14 +91,14 @@ const CreaScheda = () => {
         setEditingIndex(index);
     };
 
-    // Elimina un esercizio dalla lista
+    // Funzione per eliminare un esercizio
     const handleEliminaEsercizio = (index) => {
         const nuovaLista = eserciziSelezionati.filter((_, i) => i !== index);
         setEserciziSelezionati(nuovaLista);
         toast.info("Esercizio rimosso");
     };
 
-    // Invia tutti gli esercizi selezionati al backend
+    // Funzione per salvare la scheda con gli esercizi
     const handleSalvaScheda = () => {
         if (!idScheda) {
             toast.error("Crea prima la scheda!");
@@ -114,7 +116,7 @@ const CreaScheda = () => {
         .catch(() => toast.error("Errore nel salvataggio degli esercizi"));
     };
 
-    // Resetta il form degli esercizi
+    // Funzione per resettare i campi del form
     const resetForm = () => {
         setIdEsercizio('');
         setPeso('');
@@ -128,6 +130,7 @@ const CreaScheda = () => {
             <NavBar />
             <h2>Creazione Scheda per Utente {idUtente}</h2>
 
+            {/* Se la scheda non è ancora stata creata */}
             {!idScheda ? (
                 <div>
                     <label>Data Inizio:</label>
@@ -142,6 +145,7 @@ const CreaScheda = () => {
                 <div>
                     <h3>Aggiungi o Modifica Esercizi</h3>
 
+                    {/* Selezione dell'esercizio */}
                     <label>Seleziona Esercizio:</label>
                     <select value={idEsercizio} onChange={(e) => setIdEsercizio(e.target.value)}>
                         <option value="">-- Seleziona un esercizio --</option>
@@ -152,6 +156,7 @@ const CreaScheda = () => {
                         ))}
                     </select>
 
+                    {/* Altri campi dell'esercizio */}
                     <label>Peso:</label>
                     <input type="number" value={peso} onChange={(e) => setPeso(e.target.value)} />
 
@@ -161,6 +166,7 @@ const CreaScheda = () => {
                     <label>Ripetizioni:</label>
                     <input type="number" value={ripetizioni} onChange={(e) => setRipetizioni(e.target.value)} />
 
+                    {/* Bottone per aggiungere o modificare un esercizio */}
                     <button className="button-aggiungi" onClick={handleAggiungiOmodificaEsercizio}>
                         {editingIndex !== null ? "Salva Modifica" : "Aggiungi Esercizio"}
                     </button>
