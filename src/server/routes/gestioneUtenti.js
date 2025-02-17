@@ -20,7 +20,6 @@ router.get('/utenti', (req, res) => {
 // 📌 Crea un nuovo utente
 router.post('/creaUtente', (req, res) => {
   const { nome, cognome, dataNascita, username, password, peso, dataInizioAbb, dataFineAbb } = req.body;
-  console.log(req.body);
 
   // Verifica se l'username è già in uso
   const checkQuery = 'SELECT * FROM utenti WHERE username = ?';
