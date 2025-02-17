@@ -54,11 +54,14 @@ const DettagliScheda = () => {
       {/* Sezione che mostra la lista degli esercizi associati alla scheda */}
       <h3>Esercizi</h3>
       <ul className="esercizi-list">
-        {/* Mappa attraverso gli esercizi e visualizzali in una lista */}
         {dettagli.esercizi.map((esercizio, index) => (
-          <li key={index}>
-            {/* Mostra il nome dell'esercizio, il peso, le serie e le ripetizioni */}
-            {esercizio.nome} - {esercizio.peso} kg - {esercizio.serie} serie - {esercizio.ripetizioni} ripetizioni
+          <li key={index} className="esercizio-card">
+            <p className="esercizio-nome">
+              <strong>{esercizio.nomeEsercizio}</strong>
+            </p>
+            <p className="esercizio-info">
+              Peso: {esercizio.pesoEsercizio} kg - Serie: {esercizio.serie} - Ripetizioni: {esercizio.ripetizioni}
+            </p>
           </li>
         ))}
       </ul>

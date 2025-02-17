@@ -55,17 +55,16 @@ const RichiestaScheda = () => {
 
   return (
     <div className="richiesta-container">
-      <NavBar />  // Barra di navigazione
+      <NavBar /> 
 
-      <h2>Richiesta Schede</h2>  // Titolo della pagina
-
+      <h2>Richiesta Schede</h2>  
       {/* BOX LE MIE RICHIESTE */}
       <div className="richieste-box">
-        <h3>Le mie richieste</h3>  // Intestazione per le richieste dell'utente
-        <ul className="richieste-list">  // Lista delle richieste
+        <h3>Le mie richieste</h3>  
+        <ul className="richieste-list">  
           {richieste.map((richiesta, index) => (
-            <li key={index} className="richiesta-item">
-              PT: {richiesta.nome} {richiesta.cognome} - 
+            <li key={index} className="richiesta-item"> 
+              PT: {richiesta.nome} {richiesta.cognome} -
               Stato: {richiesta.stato} - 
               Data Richiesta: {richiesta.dataRichiesta}
             </li>  // Ogni richiesta viene visualizzata in un elemento della lista
@@ -75,14 +74,14 @@ const RichiestaScheda = () => {
 
       {/* BOX NUOVA RICHIESTA */}
       <div className="nuova-richiesta-box">
-        <h3>Nuova richiesta</h3>  // Intestazione per il form di nuova richiesta
-        <label>Seleziona un personal trainer:</label>  // Etichetta per il selettore dei PT
+        <h3>Nuova richiesta</h3>  
+        <label>Seleziona un personal trainer:</label>
         <select
           className="select-pt"  // Classe per lo stile del selettore
           value={selectedPT}  // Imposta il valore selezionato
           onChange={(e) => setSelectedPT(e.target.value)}  // Aggiorna il valore del PT selezionato
         >
-          <option value="">-- Seleziona un PT --</option>  // Opzione predefinita
+          <option value="">-- Seleziona un PT --</option> 
           {personalTrainers.map((pt) => (
             <option key={pt.IdPt} value={pt.IdPt}>
               {pt.nome} {pt.cognome}
@@ -90,12 +89,12 @@ const RichiestaScheda = () => {
           ))}
         </select>
 
-        <button className="button-invia" onClick={handleSubmit}>  // Bottone per inviare la richiesta
+        <button className="button-invia" onClick={handleSubmit}>  
           Invia richiesta
         </button>
       </div>
 
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />  // Contenitore per i toast
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />  
     </div>
   );
 };
